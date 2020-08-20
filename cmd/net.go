@@ -5,7 +5,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/ysicing/ergo/tools/network"
+	"github.com/ysicing/ergo/core/tools/network"
 )
 
 var netCmd = &cobra.Command{

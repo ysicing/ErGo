@@ -5,7 +5,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/ysicing/ergo/compose"
+	"github.com/ysicing/ergo/container/compose"
 )
 
 var composeCmd = &cobra.Command{

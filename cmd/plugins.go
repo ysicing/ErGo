@@ -5,7 +5,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/ysicing/ergo/plugins"
+	"github.com/ysicing/ergo/core/plugins"
 )
 
 var pluginsCmd = &cobra.Command{

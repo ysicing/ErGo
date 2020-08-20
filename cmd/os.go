@@ -5,8 +5,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	ergoos "github.com/ysicing/ergo/os"
-	"github.com/ysicing/ergo/shell"
+	ergoos "github.com/ysicing/ergo/core/os"
+	"github.com/ysicing/ergo/core/shell"
 )
 
 var osCmd = &cobra.Command{

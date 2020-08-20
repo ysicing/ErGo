@@ -6,7 +6,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/ysicing/ergo/helm"
+	"github.com/ysicing/ergo/container/helm"
 )
 
 var helmbase = &cobra.Command{

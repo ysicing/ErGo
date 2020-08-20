@@ -5,7 +5,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/ysicing/ergo/install"
+	"github.com/ysicing/ergo/container/install"
 	"k8s.io/klog"
 )
 

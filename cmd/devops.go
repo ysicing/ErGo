@@ -6,7 +6,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/ysicing/ergo/devops/drone"
+	"github.com/ysicing/ergo/core/devops/drone"
 	"k8s.io/klog"
 )
 

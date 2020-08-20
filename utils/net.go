@@ -6,7 +6,7 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/ysicing/ergo/install"
+	"github.com/ysicing/ergo/container/install"
 	"io/ioutil"
 	"k8s.io/klog"
 	"math/big"

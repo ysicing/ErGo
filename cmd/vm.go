@@ -5,8 +5,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/ysicing/ergo/core/vm"
 	"github.com/ysicing/ergo/utils"
-	"github.com/ysicing/ergo/vm"
 )
 
 var vmCmd = &cobra.Command{

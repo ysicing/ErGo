@@ -29,17 +29,18 @@ jobs:
       run: |
           export TZ='Asia/Shanghai'
           export PATH=$PATH:$(go env GOPATH)/bin
-          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          make dpush
-
+          make docker
+#          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#          make dpush
+#
           pushd dist
           sha256sum ergo_darwin_amd64 > ergo_darwin_amd64.sha256sum
           sha256sum ergo_linux_amd64 > ergo_linux_amd64.sha256sum
           sha256sum ergo_windows_amd64.exe > ergo_windows_amd64.sha256sum
           popd
-          ./gen.sh
-          docker logout
-          make pre-release
+#          ./gen.sh
+#          docker logout
+#          make pre-release
       env:
         GITHUB_RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}

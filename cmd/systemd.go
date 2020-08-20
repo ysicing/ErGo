@@ -5,7 +5,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/ysicing/ergo/systemd"
+	"github.com/ysicing/ergo/core/systemd"
 )
 
 var (
