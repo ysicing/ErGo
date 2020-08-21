@@ -22,7 +22,7 @@ var sscmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(composeCmd)
+	//rootCmd.AddCommand(composeCmd)
 	composeCmd.PersistentFlags().StringVar(&compose.SSHConfig.User, "user", "root", "管理员")
 	composeCmd.PersistentFlags().StringVar(&compose.SSHConfig.Password, "pass", "", "管理员密码")
 	composeCmd.PersistentFlags().StringVar(&compose.SSHConfig.PkFile, "pk", "", "管理员私钥")

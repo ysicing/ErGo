@@ -13,8 +13,8 @@ import (
 )
 
 var upgradeCmd = &cobra.Command{
-	Use:   "upgrade",
-	Short: "升级ergo版本",
+	Use:     "upgrade",
+	Short:   "升级ergo版本",
 	Aliases: []string{"up"},
 	Run: func(cmd *cobra.Command, args []string) {
 		var pkg = repos.Pkg{"ysicing", "ergo"}

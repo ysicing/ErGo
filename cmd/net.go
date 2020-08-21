@@ -30,7 +30,6 @@ var mynetworkCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(netCmd)
 	netCmd.AddCommand(activehostsCmd)
 	netCmd.AddCommand(mynetworkCmd)
 }

@@ -11,9 +11,8 @@ import (
 )
 
 var devops = &cobra.Command{
-	Use:     "devops",
-	Aliases: []string{"cicd", "d"},
-	Short:   "常用devops cli相关",
+	Use:   "op",
+	Short: "常用op cli相关",
 }
 
 var dronecli = &cobra.Command{
@@ -33,7 +32,6 @@ var dronecli = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(devops)
 	devops.AddCommand(dronecli)
 	dronecli.PersistentFlags().StringVar(&drone.Host, "host", "", "drone")
 	dronecli.PersistentFlags().StringVar(&drone.Token, "token", "", "token")

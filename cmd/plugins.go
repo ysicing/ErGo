@@ -30,7 +30,7 @@ var k8snodedns = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(pluginsCmd)
+	//rootCmd.AddCommand(pluginsCmd)
 	k8snodeshell.PersistentFlags().StringVar(&plugins.NodeName, "node", "", "node name 节点名")
 	k8snodeshell.PersistentFlags().StringVar(&plugins.ImageName, "image", plugins.DefaultImageName, "")
 	k8snodeshell.PersistentFlags().StringVar(&plugins.Kubeconfig, "cfg", plugins.DefaultKubeconfig, "")

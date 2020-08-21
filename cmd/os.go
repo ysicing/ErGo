@@ -32,7 +32,6 @@ var shellCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(osCmd)
 	osCmd.AddCommand(showosCmd, shellCmd)
 	shellCmd.PersistentFlags().StringVar(&shell.SSHConfig.User, "user", "root", "管理员")
 	shellCmd.PersistentFlags().StringVar(&shell.SSHConfig.Password, "pass", "", "管理员密码")

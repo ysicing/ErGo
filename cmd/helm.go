@@ -32,7 +32,7 @@ var helminstall = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(helmbase)
+	//rootCmd.AddCommand(helmbase)
 	helmbase.AddCommand(helmlist, helminstall)
 	helminstall.PersistentFlags().StringVar(&helm.SSHConfig.User, "user", "root", "管理员")
 	helminstall.PersistentFlags().StringVar(&helm.SSHConfig.Password, "pass", "", "管理员密码")

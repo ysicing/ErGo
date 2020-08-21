@@ -29,7 +29,7 @@ var systemdCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(systemdCmd)
+	//rootCmd.AddCommand(systemdCmd)
 	systemdCmd.PersistentFlags().StringVar(&sdname, "name", "ergo", "命令名")
 	systemdCmd.PersistentFlags().StringVar(&sdcmd, "cmd", "/usr/local/bin/ergo web", "启动命令")
 }

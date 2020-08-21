@@ -4,7 +4,7 @@
 package cloud
 
 type CloudMeta struct {
-	Key string
+	Key    string
 	Secret string
 	Region string
 }
@@ -13,7 +13,7 @@ type Cloud interface {
 	OSSupload()
 }
 
-func NewCloud(t string, cm CloudMeta) Cloud  {
+func NewCloud(t string, cm CloudMeta) Cloud {
 	switch t {
 	case "aliyun":
 		return &AliCloud{Cloud: cm}

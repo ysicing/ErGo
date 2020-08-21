@@ -37,6 +37,6 @@ var webCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(webCmd)
+	//rootCmd.AddCommand(webCmd)
 	webCmd.PersistentFlags().IntVar(&webport, "port", 12306, "端口")
 }
