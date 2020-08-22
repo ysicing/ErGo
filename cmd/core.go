@@ -3,20 +3,24 @@
 
 package cmd
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/spf13/cobra"
+	"github.com/ysicing/ergo/ops/vm"
+)
 
-var core = &cobra.Command{
-	Use:   "core",
-	Short: "核心模块",
+var op = &cobra.Command{
+	Use:     "ops",
+	Aliases: []string{"op", "o", "devops"},
+	Short:   "传统运维命令工具",
 }
 
 func init() {
-	rootCmd.AddCommand(core)
-	core.AddCommand(debianCmd) // debian
-	core.AddCommand(devops)    // op
-	core.AddCommand(osCmd)     // os
-	core.AddCommand(netCmd)
-	core.AddCommand(systemdCmd)
-	core.AddCommand(infoCmd)
-	core.AddCommand(webCmd)
+	rootCmd.AddCommand(op)
+	op.AddCommand(vm.Debian) // debian
+	op.AddCommand(devops)    // op
+	op.AddCommand(osCmd)     // os
+	op.AddCommand(netCmd)
+	op.AddCommand(systemdCmd)
+	op.AddCommand(infoCmd)
+	op.AddCommand(webCmd)
 }

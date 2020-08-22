@@ -5,15 +5,16 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/ysicing/ergo/config"
+	"github.com/ysicing/ergo/pkg/check"
+	"github.com/ysicing/ergo/utils"
 	"github.com/ysicing/go-utils/exfile"
-	"k8s.io/klog"
 )
 
 var cfgFile string
+var debugMode bool
 
 var rootCmd = &cobra.Command{
 	Use:   "ergo",
@@ -22,30 +23,26 @@ var rootCmd = &cobra.Command{
 
 // Execute execute
 func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		klog.Exit(err)
-	}
+	check.CheckResError(rootCmd.Execute())
 }
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.doge/config.yaml)")
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.config/ergo/config.yaml)")
+	rootCmd.PersistentFlags().BoolVar(&debugMode, "debug", false, "debug mode (default: false)")
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.DisableSuggestions = false
 }
 
 func initConfig() {
 	if cfgFile == "" {
-		home, err := homedir.Dir()
-		if err != nil {
-			klog.Exit(err)
-		}
-		cfgFile = fmt.Sprintf("%v/%v/%v", home, ".doge", "config.yaml")
+		cfgFile = fmt.Sprintf("%v/%v/%v/%v", utils.GetHome(), ".config", "ergo", "config.yaml")
 	}
+	viper.Set("global.debug", debugMode)
 	if !exfile.CheckFileExistsv2(cfgFile) {
 		config.WriteDefaultCfg(cfgFile)
 	}
 	viper.SetConfigFile(cfgFile)
 	viper.AutomaticEnv()
-	viper.ReadInConfig()
+	check.CheckResError(viper.ReadInConfig())
 }

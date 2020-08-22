@@ -3,7 +3,14 @@
 
 package main
 
-import "github.com/ysicing/ergo/cmd"
+import (
+	"github.com/ysicing/ergo/cmd"
+	"github.com/ysicing/ergo/pkg/logger"
+)
+
+func init() {
+	logger.InitLogger()
+}
 
 func main() {
 	cmd.Execute()
