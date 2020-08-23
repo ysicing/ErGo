@@ -142,7 +142,3 @@ func WarningOs() {
 		logger.Warn("或许不支持: ", runtime.GOOS, runtime.GOARCH)
 	}
 }
-
-func WarningDocker() {
-	Cmd("which", "docker")
-}

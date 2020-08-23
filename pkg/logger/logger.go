@@ -30,17 +30,19 @@ func InitLogger() {
 	writeSyncer := getLogWriter()
 	if utils.DebugMode() {
 		core := zapcore.NewCore(encoder, zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout)), zapcore.DebugLevel)
-		loger = zap.New(core, zap.AddCaller()).Sugar()
+		//loger = zap.New(core, zap.AddCaller()).Sugar()
+		loger = zap.New(core).Sugar()
 	} else {
 		core := zapcore.NewCore(encoder, zapcore.NewMultiWriteSyncer(writeSyncer, zapcore.AddSync(os.Stdout)), zapcore.DebugLevel)
-		loger = zap.New(core, zap.AddCaller()).Sugar()
+		//loger = zap.New(core, zap.AddCaller()).Sugar()
+		loger = zap.New(core).Sugar()
 	}
 }
 
 func getEncoder() zapcore.Encoder {
 	encoderConfig := zap.NewProductionEncoderConfig()
-	encoderConfig.EncodeTime = timeEncoder //zapcore.ISO8601TimeEncoder
-	encoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder
+	encoderConfig.EncodeTime = timeEncoder                       //zapcore.ISO8601TimeEncoder
+	encoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder //zapcore.CapitalLevelEncoder
 	return zapcore.NewConsoleEncoder(encoderConfig)
 }
 
@@ -67,25 +69,22 @@ func getLogWriter() zapcore.WriteSyncer {
 }
 
 func Debug(msg string) {
-	if utils.DebugMode() {
-		loger.Debug(msg)
-	}
+	loger.Debug(msg)
 }
 
 func Info(msg string) {
-	if utils.DebugMode() {
-		loger.Info(msg)
-	}
+	loger.Info(msg)
 }
 
 func Warn(msg string) {
-	if utils.DebugMode() {
-		loger.Warn(msg)
-	}
+	loger.Warn(msg)
 }
 
 func Error(msg string) {
-	if utils.DebugMode() {
-		loger.Error(msg)
-	}
+	loger.Error(msg)
+}
+
+func Exit(msg string) {
+	loger.Error(msg)
+	os.Exit(0)
 }

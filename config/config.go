@@ -53,7 +53,7 @@ func exampleConfig() Config {
 				Imagev1: "registry.cn-beijing.aliyuncs.com/k7scn/ansible:1.0",
 			},
 			VagrantfilePath: FilePath{
-				FilePathv1: fmt.Sprintf("%v/%v/Vagrantfile", utils.GetHome(), "vm"),
+				FilePathv1: fmt.Sprintf("%v/%v", utils.GetHome(), "vm"),
 			},
 		},
 	}

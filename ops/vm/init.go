@@ -6,7 +6,9 @@ package vm
 import (
 	"github.com/spf13/cobra"
 	"github.com/ysicing/ergo/core/vm"
-	"github.com/ysicing/ergo/utils"
+	"github.com/ysicing/ergo/pkg/check"
+	"github.com/ysicing/ergo/pkg/logger"
+	"github.com/ysicing/ergo/pkg/rc"
 )
 
 var Debian = &cobra.Command{
@@ -19,10 +21,17 @@ var newdeb = &cobra.Command{
 	Short: "创建debian virtualbox虚拟机",
 	PreRun: func(cmd *cobra.Command, args []string) {
 		// 检查虚拟机
-
+		precheck := check.CheckMeta{Type: "macos"}
+		logger.Info("[precheck] check os.")
+		if !precheck.RunOs() {
+			logger.Exit("only support Mac OS")
+		}
+		logger.Info("[precheck] check tools.")
+		if !precheck.CheckBin("vagrant") || !precheck.CheckBin("VirtualBoxVM") {
+			logger.Exit("you should install vagrant or virtualbox.")
+		}
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.WarningOs()
 		vm.VmInit()
 	},
 }
@@ -30,8 +39,13 @@ var newdeb = &cobra.Command{
 var initdeb = &cobra.Command{
 	Use:   "init",
 	Short: "初始化debian",
+	PreRun: func(cmd *cobra.Command, args []string) {
+		t := check.CheckMeta{}
+		if !t.CheckBin("docker") || !rc.CmdStatus("docker", "ps") {
+			logger.Exit("[precheck]docker not found or docker not running")
+		}
+	},
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.WarningDocker()
 		vm.InitDebian()
 	},
 }

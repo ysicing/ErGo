@@ -6,7 +6,7 @@ package vm
 import (
 	"fmt"
 	"github.com/wonderivan/logger"
-	"github.com/ysicing/ergo/utils"
+	"github.com/ysicing/ergo/pkg/rc"
 	"strings"
 )
 
@@ -15,6 +15,6 @@ func InitDebian() {
 		logger.Info("init debian: %s", host)
 		initcmd := fmt.Sprintf("run --rm -e IP=%s -e PORT=%s -e USER=%s -e PASS=%s -e ENABLEDOCKER=%v ysicing/ansible",
 			host, Port, User, Pass, DockerInstall)
-		utils.Cmdv2("docker", strings.Split(initcmd, " "))
+		rc.Cmdv2("docker", strings.Split(initcmd, " "))
 	}
 }

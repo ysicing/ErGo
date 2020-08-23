@@ -6,8 +6,8 @@ package systemd
 import (
 	"bytes"
 	"fmt"
-	"github.com/wonderivan/logger"
-	"github.com/ysicing/ergo/utils"
+	"github.com/ysicing/ergo/pkg/logger"
+	"github.com/ysicing/ergo/pkg/rc"
 	"github.com/ysicing/go-utils/exfile"
 	"html/template"
 )
@@ -18,19 +18,19 @@ type SystemdMeta struct {
 }
 
 func (m SystemdMeta) PreCheck() bool {
-	if !utils.CmdResv2("which", "systemctl") {
+	if !rc.GetCmdStatus("systemctl") {
 		logger.Info("you need install systemctl.")
 		return false
 	}
 	if exfile.CheckFileExistsv2(fmt.Sprintf("/etc/systemd/system/%v.service", m.Name)) {
-		logger.Info("%s service exist: /etc/systemd/system/%v.service", m.Name, m.Name)
+		logger.Info(fmt.Sprintf("%s service exist: /etc/systemd/system/%v.service", m.Name, m.Name))
 		return false
 	}
 	if exfile.CheckFileExistsv2(fmt.Sprintf("/etc/systemd/system/multi-user.target.wants/%v.service", m.Name)) {
-		logger.Info("%s service exist: /etc/systemd/system/multi-user.target.wants/%v.service", m.Name, m.Name)
+		logger.Info(fmt.Sprintf("%s service exist: /etc/systemd/system/multi-user.target.wants/%v.service", m.Name, m.Name))
 		return false
 	}
-	if utils.CmdResv2("systemctl", "cat", m.Name) {
+	if rc.CmdStatus("systemctl", "cat", m.Name) {
 		return false
 	}
 	return true
@@ -49,5 +49,5 @@ func (m SystemdMeta) Enable() {
 	if m.Name == "ergo" {
 		exfile.WriteFile("/usr/local/bin/preergo", preergo)
 	}
-	logger.Info(utils.CmdRes("systemctl", "enable", m.Name, "--now"))
+	logger.Info(rc.CmdRes("systemctl", "enable", m.Name, "--now"))
 }

@@ -4,8 +4,8 @@
 package compose
 
 import (
-	"github.com/wonderivan/logger"
-	"github.com/ysicing/ergo/utils"
+	"github.com/ysicing/ergo/pkg/check"
+	"github.com/ysicing/ergo/pkg/logger"
 )
 
 type Ss struct {
@@ -15,8 +15,10 @@ type Ss struct {
 func (s Ss) Check() {
 	logger.Debug("check ss")
 	if s.cfg.DeployLocal {
-		utils.Cmd("which", "docker")
-		utils.Cmd("which", "docker-compose")
+		t := check.CheckMeta{}
+		if !(t.CheckBin("docker") && t.CheckBin("docker-compose")) {
+			logger.Exit("docker or docker-compose not found")
+		}
 	} else {
 		for _, ip := range s.cfg.Hosts {
 			SSHConfig.Cmd(ip, "which docker")

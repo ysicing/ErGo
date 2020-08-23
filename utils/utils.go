@@ -23,6 +23,7 @@ func RunLinux() bool {
 	return false
 }
 
+// GetHome 获取home目录
 func GetHome() string {
 	if home, err := homedir.Dir(); err == nil {
 		return home
